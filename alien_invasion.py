@@ -69,7 +69,17 @@ class AlienInvasion:
     def _check_play_button(self, mouse_pose):
         """Start a New Game When the Player Clicks Play."""
         if self.play_button.rect.collidepoint(mouse_pose):
+            # Reset the Game Statistics
+            self.stats.reset_status()
             self.stats.game_active = True
+
+            # Get Rid of Any Remaining Aliens and Bullets
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # Create a New Fleet and Center the Ship.
+            self._create_fleet()
+            self.ship.center_ship()
 
     def _check_keydown_events(self, event):
         """Respond to keypress."""
