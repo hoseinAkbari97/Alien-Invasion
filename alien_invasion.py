@@ -95,7 +95,23 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_p:
+            if not self.stats.game_active:
+                # Reset the Game Statistics
+                self.stats.reset_status()
+                self.stats.game_active = True
 
+                # Get Rid of Any Remaining Aliens and Bullets
+                self.aliens.empty()
+                self.bullets.empty()
+
+                # Create a New Fleet and Center the Ship.
+                self._create_fleet()
+                self.ship.center_ship()
+
+                # Hide the Mouse Cursor
+                pygame.mouse.set_visible(False)
+                
     def _check_keyup_events(self, event):
         """Respond to key release."""
         if event.key == pygame.K_RIGHT:
