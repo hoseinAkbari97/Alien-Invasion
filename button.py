@@ -30,8 +30,14 @@ class Button:
         self.msg_image_rect.center = self.rect.center
 
     def selected_button(self):
+        """Changing the Color of the Selected Button."""
         self.button_color = (255, 0, 0)
         self.text_color = (100, 100, 100)
+
+    def reset_button(self):
+        """Resetting the Color of the Button"""
+        self.button_color = (0, 255, 0)
+        self.text_color = (255, 255, 255)
 
     def draw_button(self):
         """Draw Blank Button and Then Draw Message."""

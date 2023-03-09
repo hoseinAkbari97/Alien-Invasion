@@ -88,12 +88,18 @@ class AlienInvasion:
         elif dif_clicked_1 and not self.stats.game_active:
             self.settings.diff_flag = 1
             self.dif_1.selected_button()
+            self.dif_2.reset_button()
+            self.dif_3.reset_button()
         elif dif_clicked_2 and not self.stats.game_active:
             self.settings.diff_flag = 2
             self.dif_2.selected_button()
+            self.dif_1.reset_button()
+            self.dif_3.reset_button()
         elif dif_clicked_3 and not self.stats.game_active:
             self.settings.diff_flag = 3
             self.dif_3.selected_button()
+            self.dif_1.reset_button()
+            self.dif_2.reset_button()
 
     def _check_keydown_events(self, event):
         """Respond to keypress."""
