@@ -40,8 +40,12 @@ class AlienInvasion:
         # Creating an entire fleet of aliens
         self._create_fleet()
 
-        # Make the Play Button
-        self.play_button = Button(self, "PLAY")
+        # Make the Play and Difficulty Button
+        self.play_button = Button(self, "PLAY", 0)
+        self.dif_button = Button(self, "DIFFICULTY(DEFAULT:MEDIUM", 4)
+        self.dif_1 = Button(self, "EASY", 3)
+        self.dif_2 = Button(self, "MEDIUM", 2)
+        self.dif_3 = Button(self, "Hard", 1)
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -67,12 +71,29 @@ class AlienInvasion:
                 self._check_play_button(mouse_pos)
 
     def _check_play_button(self, mouse_pose):
-        """Start a New Game When the Player Clicks Play."""
+        """Start a New Game When the Player Clicks Play
+        or Choose the Difficulty."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pose)
+        dif_clicked_1 = self.dif_1.rect.collidepoint(mouse_pose)
+        dif_clicked_2 = self.dif_2.rect.collidepoint(mouse_pose)
+        dif_clicked_3 = self.dif_3.rect.collidepoint(mouse_pose)
+
+        # Operating the Play Button
         if button_clicked and not self.stats.game_active:
             # Reset the Game Settings
             self.settings.initialize_dynamic_settings()
             self._start_game()
+
+        # Operating Difficulty Levels
+        elif dif_clicked_1 and not self.stats.game_active:
+            self.settings.diff_flag = 1
+            self.dif_1.selected_button()
+        elif dif_clicked_2 and not self.stats.game_active:
+            self.settings.diff_flag = 2
+            self.dif_2.selected_button()
+        elif dif_clicked_3 and not self.stats.game_active:
+            self.settings.diff_flag = 3
+            self.dif_3.selected_button()
 
     def _check_keydown_events(self, event):
         """Respond to keypress."""
@@ -242,9 +263,13 @@ class AlienInvasion:
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
-        # Draw the Play Button if the Game Is Inactive.
+        # Draw the Play and Difficulty Buttons if the Game Is Inactive.
         if not self.stats.game_active:
             self.play_button.draw_button()
+            self.dif_button.draw_button()
+            self.dif_1.draw_button()
+            self.dif_2.draw_button()
+            self.dif_3.draw_button()
 
         """Make the most recently drawn screen visible."""
         pygame.display.flip()
