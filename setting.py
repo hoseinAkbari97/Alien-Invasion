@@ -28,6 +28,9 @@ class Setting:
         # How Quicly the Game Speeds Up
         self.speedup_scale = 1.1
 
+        # How Quickly the Alien Point Values Increase
+        self.score_scale = 1.5
+
         # Setting the Difficulty Flag
         self.diff_flag = 2
 
@@ -55,7 +58,9 @@ class Setting:
         self.alien_points = 50
 
     def increase_speed(self):
-        """Increase Speed Settings."""
+        """Increase Speed Settings and Alien Point Values."""
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
