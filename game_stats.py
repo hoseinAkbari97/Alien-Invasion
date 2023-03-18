@@ -8,6 +8,9 @@ class GameStats:
         # Start Alien Invasion in an Inactive State.
         self.game_active = False
 
+        # High Score Should Never Be Reset.
+        self.high_score = 0
+
     def reset_status(self):
         """Initialize Statistics that can change during the game."""
         self.ships_left = self.settings.ship_limit
